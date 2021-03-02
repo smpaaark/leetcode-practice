@@ -2,7 +2,9 @@ package leetcode.queue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Q199 {
 	
@@ -18,6 +20,36 @@ public class Q199 {
 		System.out.println(Arrays.toString(q.rightSideView(treeNode).toArray()));
 		
 	}
+	
+	public List<Integer> rightSideView_other(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		
+		if (root != null) {
+			Queue<TreeNode> q = new LinkedList<>();
+			q.offer(root);
+			
+			while (!q.isEmpty()) {
+				int size = q.size();
+				for (int i = 0; i < size; i++) {
+					TreeNode currentNode = q.poll();
+					if (i == size - 1) {
+						result.add(currentNode.val);
+					}
+					
+					if (currentNode.left != null) {
+						q.offer(currentNode.left);
+					}
+					
+					if (currentNode.right != null) {
+						q.offer(currentNode.right);
+					}
+				}
+			}
+		}
+		
+		return result;
+    }
+	
 	
 	public List<Integer> rightSideView(TreeNode root) {
 		List<Integer> result = new ArrayList<>();
