@@ -20,33 +20,33 @@ public class Q897 {
 		TreeNode result = q.increasingBST(root);
 	}
 
-//	public TreeNode increasingBST(TreeNode root) {
-//		TreeNode result = new TreeNode();
-//		recursion(root, result);
-//		return result.right;
-//    }
-//	
-//	private TreeNode recursion(TreeNode currentNode, TreeNode result) {
-//		if (currentNode == null) {
-//			return result;
-//		}
-//		
-//		TreeNode temp = recursion(currentNode.left, result);
-//		temp.right = new TreeNode(currentNode.val);
-//		return recursion(currentNode.right, temp.right);
-//	}
-	
 	public TreeNode increasingBST(TreeNode root) {
-        return increasingBST(root, null);
+		TreeNode result = new TreeNode();
+		recursion(root, result);
+		return result.right;
     }
-
-    public TreeNode increasingBST(TreeNode root, TreeNode tail) {
-        if (root == null) return tail;
-        TreeNode res = increasingBST(root.left, root);
-        root.left = null;
-        root.right = increasingBST(root.right, tail);
-        return res;
-    }
+	
+	private TreeNode recursion(TreeNode currentNode, TreeNode result) {
+		if (currentNode == null) {
+			return result;
+		}
+		
+		TreeNode temp = recursion(currentNode.left, result);
+		temp.right = new TreeNode(currentNode.val);
+		return recursion(currentNode.right, temp.right);
+	}
+	
+//	public TreeNode increasingBST(TreeNode root) {
+//        return increasingBST(root, null);
+//    }
+//
+//    public TreeNode increasingBST(TreeNode root, TreeNode tail) {
+//        if (root == null) return tail;
+//        TreeNode res = increasingBST(root.left, root);
+//        root.left = null;
+//        root.right = increasingBST(root.right, tail);
+//        return res;
+//    }
 
 	static class TreeNode {
 		
