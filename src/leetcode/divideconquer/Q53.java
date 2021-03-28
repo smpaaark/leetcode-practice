@@ -8,11 +8,10 @@ public class Q53 {
 	}
 	
 	public int maxSubArray(int[] nums) {
-		return helper(nums, 0, nums.length-1);
-	}
+        return recursion(nums, 0, nums.length - 1);
+    }
 
-	public int helper(int[] nums, int start, int end){
-		// Boundry
+	private int recursion(int[] nums, int start, int end) {
 		if (start == end) {
 			return nums[start];
 		}
@@ -21,37 +20,32 @@ public class Q53 {
 			return Integer.MIN_VALUE;
 		}
 		
-		// Declair
-		int left_max = 0;
-		int right_max = 0;
-        int middle = (end - start) / 2 + start;
-        int ml = 0;
-        int mr = 0;
-
-        // Find
-        left_max = helper(nums, start, middle-1);
-        right_max = helper(nums, middle+1, end);
-
-        // Middle
-        int sum = 0;
-        for (int i = middle - 1; i >= start; i--){
-            sum += nums[i];
-            if (sum > ml) {
-            	ml = sum;
-            }
-        }
-        
-        sum = 0;
-        for (int i = middle + 1; i <= end; i++){
-            sum += nums[i];
-            if (sum > mr) {
-            	mr = sum;
-            }
-        }
-        
-        int middle_value = ml + mr + nums[middle];
-        
-        return Math.max(Math.max(left_max, right_max), middle_value);
-    }
+		int mid = (start + end) / 2;
+		
+		int leftMax = recursion(nums, start, mid - 1);
+		int rightMax = recursion(nums, mid + 1, end);
+		
+		int tempLeftMax = 0;
+		int sum = 0;
+		for (int i = mid - 1; i >= start; i--) {
+			sum += nums[i];
+			if (sum > tempLeftMax) {
+				tempLeftMax = sum;
+			}
+		}
+		
+		int tempRightMax = 0;
+		sum = 0;
+		for (int i = mid + 1; i <= end; i++) {
+			sum += nums[i];
+			if (sum > tempRightMax) {
+				tempRightMax = sum;
+			}
+		}
+		
+		int midSumMax = tempLeftMax + tempRightMax + nums[mid];
+		
+		return Math.max(Math.max(leftMax, rightMax), midSumMax);
+	}
 	
 }
