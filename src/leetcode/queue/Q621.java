@@ -11,8 +11,8 @@ public class Q621 {
 		Q621 q = new Q621();
 //		System.out.println(q.leastInterval(new char[] {'A','A','A','B','B','B'}, 2));
 //		System.out.println(q.leastInterval(new char[] {'A','A','A','B','B','B'}, 0));
-		System.out.println(q.leastInterval(new char[] {'A','A','A','A','A','A','B','C','D','E','F','G'}, 2));
-//		System.out.println(q.leastInterval(new char[] {'A','A','A','B','B','B', 'C','C','C', 'D', 'D', 'E'}, 2));
+//		System.out.println(q.leastInterval(new char[] {'A','A','A','A','A','A','B','C','D','E','F','G'}, 2));
+		System.out.println(q.leastInterval(new char[] {'A','A','A','B','B','B', 'C','C','C', 'D', 'D', 'E'}, 2));
 	}
 	
 	public int leastInterval(char[] tasks, int n) {
@@ -33,6 +33,7 @@ public class Q621 {
         			result++;
         			tempArray[i]--;
         			tempArrayCount--;
+        			map.put(c, result + n);
         		}
         	}
         	
@@ -59,6 +60,7 @@ public class Q621 {
         			result++;
         			tempArray[i]--;
         			tempArrayCount--;
+        			map.put(c, result + n);
         		}
         	}
         	
