@@ -3,14 +3,17 @@ package leetcode.recursion;
 public class Q1137 {
 	
 	private int[] num = new int[38];
+	private static int count = 0;
 	
 	public static void main(String[] args) {
 		Q1137 q = new Q1137();
-		System.out.println(q.tribonacci(3));
+		System.out.println(q.tribonacci(37));
+		System.out.println(count);
 	}
 	
 	
 	public int tribonacci(int n) {
+		count++;
         if (n == 0) {
         	return 0;
         } else if (n == 1 || n == 2) {
