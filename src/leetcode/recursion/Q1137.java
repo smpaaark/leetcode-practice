@@ -6,7 +6,7 @@ public class Q1137 {
 	
 	public static void main(String[] args) {
 		Q1137 q = new Q1137();
-		System.out.println(q.tribonacci(4));
+		System.out.println(q.tribonacci(3));
 	}
 	
 	
@@ -18,13 +18,14 @@ public class Q1137 {
         	return 1;
         }
         
+        int result  = 0;
+        result += num[n - 3] > 0 ? num[n - 3] : tribonacci(n - 3);
+        result += num[n - 2] > 0 ? num[n - 2] : tribonacci(n - 2);
+        result += num[n - 1] > 0 ? num[n - 1] : tribonacci(n - 1);
         
-        return recursion(n - 3) + recursion(n - 2) +recursion(n - 1);
+        num[n] = result;
+        
+        return result;
     }
-
-
-	private int recursion(int number) {
-		return num[number] != 0 ? num[number] : num[number - 1] + num[number - 2] + num[number - 3];
-	}
 	
 }
