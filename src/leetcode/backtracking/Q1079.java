@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class Q1079 {
-	
+
 	public static void main(String[] args) {
 		Q1079 q = new Q1079();
 		System.out.println(q.numTilePossibilities("AAABBC"));
