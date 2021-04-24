@@ -2,33 +2,62 @@ package leetcode.bfs;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
 /**
+ * LeetCode
  * 101. Symmetric Tree
- * 
- * 
- * 
- * 
+ * 시간 복잡도: O(n)
+ * 공간 복잡도: O(n)
  */
 public class Q101 {
+	
+	public static void main(String[] args) {
+		Q101 q = new Q101();
+		
+		TreeNode head = new TreeNode(1);
+		head.left = new TreeNode(2);
+		head.right = new TreeNode(2);
+		
+		head.left.right = new TreeNode(3);
+		head.right.right = new TreeNode(3);
+		
+		
+		System.out.println(q.isSymmetric(head));
+	}
 	
 	public boolean isSymmetric(TreeNode root) {
 		if (root.left == null && root.right == null) {
 			return true;
 		}
 		
-		Queue<TreeNode> queue = new LinkedList<>();
-		queue.offer(root);
+		Queue<TreeNode> leftQueue = new LinkedList<>();
+		Queue<TreeNode> rightQueue = new LinkedList<>();
+		leftQueue.offer(root.left);
+		rightQueue.offer(root.right);
 		
-		int level = 1;
-		while (!queue.isEmpty()) {
-			TreeNode currentNode = queue.poll();
+		while (!leftQueue.isEmpty() && !rightQueue.isEmpty()) {
+			TreeNode leftNode = leftQueue.poll();
+			TreeNode rightNode = rightQueue.poll();
 			
-			queue.offer(currentNode.left);
-			queue.offer(currentNode.right);
+			if (leftNode == null && rightNode == null) {
+				continue;
+			}
+			
+			if (leftNode == null || rightNode == null) {
+				return false;
+			}
+			
+			if (leftNode.val != rightNode.val) {
+				return false;
+			}
+			
+			leftQueue.offer(leftNode.left);
+			leftQueue.offer(leftNode.right);
+			rightQueue.offer(rightNode.right);
+			rightQueue.offer(rightNode.left);
 		}
 		
+		return true;
     }
 	
 	static class TreeNode {
