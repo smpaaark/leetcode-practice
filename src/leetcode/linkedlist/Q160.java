@@ -30,34 +30,43 @@ public class Q160 {
     }
 
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        ListNode newHeadA = reverse(headA);
-        ListNode newHeadB = reverse(headB);
+        int aLength = findLength(headA);
+        int bLength = findLength(headB);
 
-        if (newHeadA.val != newHeadB.val) {
-            return null;
+        if (aLength > bLength) {
+            headA = changeHead(headA, aLength - bLength);
+        } else {
+            headB = changeHead(headB, bLength - aLength);
         }
 
-        ListNode resultNode = null;
-        while (newHeadA.val == newHeadB.val) {
-            newHeadA = newHeadA.next;
-            newHeadB = newHeadB.next;
-            resultNode = newHeadA;
+        ListNode currentA = headA;
+        ListNode currentB = headB;
+        while (currentA != null && currentB != null && currentA != currentB) {
+            currentA = currentA.next;
+            currentB = currentB.next;
         }
 
-        return resultNode;
+        return currentA;
     }
 
-    private ListNode reverse(ListNode head) {
+    private ListNode changeHead(ListNode head, int moveCount) {
         ListNode currentNode = head;
-        ListNode prevNode = null;
-        while (currentNode != null) {
-            ListNode nextNode = currentNode.next;
-            currentNode.next = prevNode;
-            prevNode = currentNode;
-            currentNode = nextNode;
+        for (int i = 0; i < moveCount; i++) {
+            currentNode = currentNode.next;
         }
 
-        return prevNode;
+        return currentNode;
+    }
+
+    private int findLength(ListNode head) {
+        int length = 0;
+        ListNode currentNode = head;
+        while (currentNode != null) {
+            length++;
+            currentNode = currentNode.next;
+        }
+
+        return length;
     }
 
     static class ListNode {
@@ -70,6 +79,13 @@ public class Q160 {
             next = null;
         }
 
+        @Override
+        public String toString() {
+            return "ListNode{" +
+                    "val=" + val +
+                    ", next=" + next +
+                    '}';
+        }
     }
 
 }
