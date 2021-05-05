@@ -8,6 +8,11 @@ import java.util.*;
  */
 public class Q347 {
 
+    public static void main(String[] args) {
+        Q347 q = new Q347();
+        q.topKFrequent(new int[] {1,1,1,2,2,3}, 2);
+    }
+
     public int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int num : nums) {
@@ -52,6 +57,14 @@ public class Q347 {
         public NumCount(int num, int count) {
             this.num = num;
             this.count = count;
+        }
+
+        @Override
+        public String toString() {
+            return "NumCount{" +
+                    "num=" + num +
+                    ", count=" + count +
+                    '}';
         }
     }
 
