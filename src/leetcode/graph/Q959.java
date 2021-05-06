@@ -9,70 +9,67 @@ import java.util.Queue;
  */
 public class Q959 {
 
+    int count;
+    int n;
+    int[] f;
+
     public static void main(String[] args) {
         Q959 q = new Q959();
         System.out.println(q.regionsBySlashes(new String[] {" /","/ "}));
     }
 
     public int regionsBySlashes(String[] grid) {
-        int N = grid.length;
-        DSU dsu = new DSU(4 * N * N);
-        for (int r = 0; r < N; ++r)
-            for (int c = 0; c < N; ++c) {
-                int root = 4 * (r * N + c);
-                char val = grid[r].charAt(c);
-                if (val != '\\') {
-                    dsu.union(root + 0, root + 1);
-                    dsu.union(root + 2, root + 3);
-                }
-                if (val != '/') {
-                    dsu.union(root + 0, root + 2);
-                    dsu.union(root + 1, root + 3);
-                }
-
-                // north south
-                if (r + 1 < N)
-                    dsu.union(root + 3, (root + 4 * N) + 0);
-                if (r - 1 >= 0)
-                    dsu.union(root + 0, (root - 4 * N) + 3);
-                // east west
-                if (c + 1 < N)
-                    dsu.union(root + 2, (root + 4) + 1);
-                if (c - 1 >= 0)
-                    dsu.union(root + 1, (root - 4) + 2);
-            }
-
-        int ans = 0;
-        for (int x = 0; x < 4 * N * N; ++x) {
-
-            int temp = dsu.find(x);
-            if (temp == x)
-                ans++;
+        n = grid.length;
+        f = new int[n * n * 4];
+        count = n * n * 4;
+        for (int i = 0; i < n * n * 4; ++i) {
+            f[i] = i;
         }
 
-        return ans;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i > 0) {
+                    union(g(i - 1, j, 2), g(i, j, 0));
+                }
+
+                if (j > 0) {
+                    union(g(i, j - 1, 1), g(i, j, 3));
+                }
+
+                if (grid[i].charAt(j) != '/') {
+                    union(g(i, j, 0), g(i, j, 1));
+                    union(g(i, j, 2), g(i, j, 3));
+                }
+
+                if (grid[i].charAt(j) != '\\') {
+                    union(g(i , j, 0), g(i , j,  3));
+                    union(g(i , j, 2), g(i , j,  1));
+                }
+            }
+        }
+
+        return count;
     }
 
-    static class DSU {
-        int[] parent;
+    private void union(int x, int y) {
+        x = find(x);
+        y = find(y);
+        if (x != y) {
+            f[x] = y;
+            count--;
+        }
+    }
 
-        public DSU(int N) {
-            parent = new int[N];
-            for (int i = 0; i < N; ++i)
-                parent[i] = i;
+    private int find(int x) {
+        if (x != f[x]) {
+            f[x] = find(f[x]);
         }
 
-        public int find(int x) {
-            if (parent[x] != x) {
-                parent[x] = find(parent[x]);
-            }
+        return f[x];
+    }
 
-            return parent[x];
-        }
-
-        public void union(int x, int y) {
-            parent[find(x)] = find(y);
-        }
+    private int g(int i, int j, int k) {
+        return (i * n + j) * 4 + k;
     }
 
 }
