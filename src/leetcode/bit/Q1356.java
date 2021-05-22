@@ -8,6 +8,18 @@ import java.util.PriorityQueue;
  */
 public class Q1356 {
 
+    public static void main(String[] args) {
+        System.out.println(Integer.bitCount(0)); //0
+        System.out.println(Integer.bitCount(1)); //1
+        System.out.println(Integer.bitCount(2)); //10
+        System.out.println(Integer.bitCount(3)); //11
+        System.out.println(Integer.bitCount(4)); //100
+        System.out.println(Integer.bitCount(5)); //101
+        System.out.println(Integer.bitCount(6)); //110
+        System.out.println(Integer.bitCount(7)); //111
+        System.out.println(Integer.bitCount(8)); //1000
+    }
+
     public int[] sortByBits(int[] arr) {
         PriorityQueue<BitCount> queue = new PriorityQueue<>((a, b) -> {
             if (a.bitCount == b.bitCount) {
