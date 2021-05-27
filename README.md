@@ -16,5 +16,5 @@
 15. BFS
 16. 비트 연산
 17. 문자열
-18. **분할 정복(:heavy_check_mark:)**
-19. 그리디
+18. 분할 정복(:heavy_check_mark:)**
+19. **그리디(:heavy_check_mark:)**
