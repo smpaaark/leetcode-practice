@@ -11,9 +11,18 @@ public class Q404 {
             return 0;
         }
 
-        int leftVal = sumOfLeftLeaves(root.left);
+        int leftValue = 0;
+        if (root.left != null) {
+            if (root.left.left == null && root.left.right == null) {
+                leftValue += root.left.val;
+            } else {
+                leftValue += sumOfLeftLeaves(root.left);
+            }
+        }
 
-        return leftVal;
+        leftValue += sumOfLeftLeaves(root.right);
+
+        return leftValue;
     }
 
     class TreeNode {
