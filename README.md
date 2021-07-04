@@ -12,8 +12,8 @@
 11. 동적 프로그래밍
 12. 정렬
 13. 이진 탐색
-14. **DFS(:heavy_check_mark:)**
-15. BFS
+14. DFS
+15. **BFS(:heavy_check_mark:)**
 16. 비트 연산
 17. 문자열
 18. 분할 정복
