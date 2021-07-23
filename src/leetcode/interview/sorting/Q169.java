@@ -1,5 +1,7 @@
 package leetcode.interview.sorting;
 
+import java.util.Arrays;
+
 /**
  * LeetCode
  * 169. Majority Element
@@ -23,6 +25,11 @@ public class Q169 {
         }
 
         return majorNum;
+    }
+
+    public int majorityElement2(int[] nums) {
+        Arrays.sort(nums); // 배열을 정렬한다.
+        return nums[nums.length / 2]; // majority 수는 length / 2 개 이상 있기 때문에 정렬을 하게 되면 항상 중간 요소의 값이 된다.
     }
 
 }
