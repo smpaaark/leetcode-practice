@@ -2,39 +2,23 @@ package leetcode.stack;
 
 import java.util.Stack;
 
-/**
- * LeetCode
- * 20. Valid Parentheses
- */
 public class Q20 {
-    public static void main(String[] args) {
-        Q20 q = new Q20();
-        System.out.println(q.isValid("]"));
-    }
+
     public boolean isValid(String s) {
+        if (s.length() < 2) {
+            return false;
+        }
+
         Stack<Character> stack = new Stack<>();
         for (char c : s.toCharArray()) {
-            switch (c) {
-                case '(':
-                case '{':
-                case '[':
-                    stack.push(c);
-                    break;
-                case ')':
-                    if (stack.isEmpty() || stack.pop() != '(') {
-                        return false;
-                    }
-                    break;
-                case '}':
-                    if (stack.isEmpty() || stack.pop() != '{') {
-                        return false;
-                    }
-                    break;
-                case ']':
-                    if (stack.isEmpty() || stack.pop() != '[') {
-                        return false;
-                    }
-                    break;
+            if (c == '(') {
+                stack.push(')');
+            } else if (c == '{') {
+                stack.push('}');
+            } else if (c == '[') {
+                stack.push(']');
+            } else if (stack.isEmpty() || stack.pop() != c) {
+                return false;
             }
         }
 

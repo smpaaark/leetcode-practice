@@ -1,24 +1,19 @@
 package leetcode.linkedlist;
 
-/**
- * LeetCode
- * 141. Linked List Cycle
- */
 public class Q141 {
 
     public boolean hasCycle(ListNode head) {
-        ListNode step1 = head;
-        ListNode step2 = head;
+        if (head == null) {
+            return false;
+        }
 
-        while (step1 != null && step2 != null) {
-            step1 = step1.next;
-            if (step2.next != null) {
-                step2 = step2.next.next;
-            } else {
-                return false;
-            }
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
 
-            if (step1 == step2) {
+            if (slow == fast) {
                 return true;
             }
         }
@@ -26,16 +21,16 @@ public class Q141 {
         return false;
     }
 
-     static class ListNode {
+    class ListNode {
 
-         int val;
-         ListNode next;
+        int val;
+        ListNode next;
 
-         ListNode(int x) {
-             val = x;
-             next = null;
-         }
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
 
-     }
+    }
 
 }
