@@ -7,19 +7,18 @@ package leetcode.dp;
 public class Q70 {
 
     public int climbStairs(int n) {
-        if (n <= 3) {
+        if (n <= 2) {
             return n;
         }
 
-        int[] dp = new int[n + 1];
-        dp[1] = 1;
-        dp[2] = 2;
-        dp[3] = 3;
-        for (int i = 4; i <= n; i++) {
+        int[] dp = new int[n];
+        dp[0] = 1;
+        dp[1] = 2;
+        for (int i = 2; i < n; i++) {
             dp[i] = dp[i - 2] + dp[i - 1];
         }
 
-        return dp[n];
+        return dp[n - 1];
     }
 
 }
